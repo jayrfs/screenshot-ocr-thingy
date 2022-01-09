@@ -1,0 +1,7 @@
+#!/bin/sh
+notify-send -t 3000 "ctrl alt C" "starting textscope"
+mkdir -p /tmp/noscope/ && cd $_
+maim -so -b 2 --nokeyboard --hidecursor image.png
+tesseract image.png ocr
+xclip -selection clipboard -i < ocr.txt
+notify-send -t 3000 "textscope" "copied text = $(cat ./ocr.txt)"
